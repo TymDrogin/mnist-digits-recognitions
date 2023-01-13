@@ -1,6 +1,5 @@
-from argparse import ArgumentDefaultsHelpFormatter
 import numpy as np
-
+from tqdm import tqdm
 
 
 
@@ -8,16 +7,27 @@ mnist_config = {
     "layers":[784, 20, 20, 10],
     "activation":["relu","relu","relu","softmax"],
     "learning_rate": 0.0001,
+    "epochs":150,
+    "random_seed": 1,
+    
 }
 
 class Network:
     def __init__(self, config) -> None:
         self.layers = []
-        for i in range(len(config["layers"]) -1):
-            self.layers.append(Layer(config["layers"][i], config["layers"][i+1],config["activation"][i],)) #layer initialization with config values 
+        for i in range(len(config["layers"]) - 1):
+            self.layers.append(Layer(config["layers"][i], config["layers"][i+1],config["activation"][i])) #layer initialization with config values 
 
         self.learning_rate = config["learning_rate"]
-        
+        self.epochs = config["epochs"]
+
+
+
+    def train(self, train_data):
+        pass
+
+    def predict(self):
+        pass
 
 class Layer:
     #class represents o ne layer of the network
@@ -40,7 +50,7 @@ class Layer:
             raise ValueError(f"Invalid activation function: {name}")
 
     
-    def forward(self, input_vector):
+    def feed_forward(self, input_vector):
         weighted_sum = np.dot(input_vector, self.weights) + self.bias
         output_vector = self.activation(weighted_sum)
         return output_vector
