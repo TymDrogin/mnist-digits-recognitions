@@ -1,2 +1,2 @@
 # mnist_digits_recognitions
-Neural network build from scratch to recognise mnist digits
+Simple dense NN written from scratch and also tf realisation
